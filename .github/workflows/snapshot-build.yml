@@ -27,4 +27,4 @@ jobs:
         -Pscala-2.11.7 \
         -Pkubernetes \
         -DskipTests \
-        -q clean package --projects \!spark-parent_2.11:spark-streaming-kafka-0-10_2.11
+        -q clean package --projects \!spark-streaming-kafka-0-10_2.11
