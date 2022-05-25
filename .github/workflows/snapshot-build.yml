@@ -17,13 +17,16 @@ jobs:
       uses: actions/setup-java@v3
       with:
         java-version: '8'
-        distribution: 'temurin'
+        distribution: 'adopt-hotspot'
         cache: maven
+    - name: check java_home
+      run: |
+        echo "java home: $JAVA HOME"
     - name: Build with Maven
       run: |
-        ./dev/change-scala-version.sh 2.12 \
-        ./dev/make-distribution.sh --name uberpoc-spark --pip --r --tgz -Psparkr -phadoop-2.9.1 -Phive -Phive-thriftserver -Pyarn \
-        export MAVEN_OPTS="-Xmx2g -XX:ReservedCodeCacheSize=512m" \
+        ./dev/change-scala-version.sh 2.11
+        ./dev/make-distribution.sh --name uberpoc-spark --pip --r --tgz -Psparkr -Phadoop-2.9.1 -Phive -Phive-thriftserver -Pyarn
+        export MAVEN_OPTS="-Xmx2g -XX:ReservedCodeCacheSize=512m"
         ./build/mvn \
         -T 2.0C \
         -pl '!external/kafka-0-10,!external/kafka-0-10-assembly,!external/kafka-0-10-sql,!external/avro' \
