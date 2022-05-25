@@ -27,4 +27,4 @@ jobs:
         -Pscala-2.11.7 \
         -Pkubernetes \
         -DskipTests \
-        -q clean package --projects "!external/kafka-0-10,!>external/kafka-0-10-assembly,!external/kafka-0-10-sql"
+        -q clean package --projects '!external.--'
