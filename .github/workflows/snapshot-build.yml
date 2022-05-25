@@ -21,11 +21,14 @@ jobs:
         cache: maven
     - name: Build with Maven
       run: |
+        ./dev/change-scala-version.sh 2.12 && \
+        ./dev/make-distribution.sh --name uberpoc-spark --pip --r --tgz -Psparkr -phadoop-2.9.1 -Phive -Phive-thriftserver -Pyarn && \
+        export MAVEN_OPTS="-Xmx2g -XX:ReservedCodeCacheSize=512m" \
         ./build/mvn \
+        -T 2.0C \
         -pl '!external/kafka-0-10,!external/kafka-0-10-assembly,!external/kafka-0-10-sql,!external/avro' \
         -Dhadoop.version=2.9.1 \
         -Pyarn,hive,hive-thriftserver \
-        -Pscala-2.11.7 \
-        -Pkubernetes \
+        -Pscala-2.12 \
         -DskipTests \
-        -q clean package
+        -X clean package
