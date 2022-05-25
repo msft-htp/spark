@@ -22,9 +22,10 @@ jobs:
     - name: Build with Maven
       run: |
         ./build/mvn \
+        -pl !external.-- \
         -Dhadoop.version=2.9.1 \
         -Pyarn,hive,hive-thriftserver \
         -Pscala-2.11.7 \
         -Pkubernetes \
         -DskipTests \
-        -q clean package --projects '!external.--'
+        -q clean package
