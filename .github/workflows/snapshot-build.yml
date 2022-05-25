@@ -22,7 +22,7 @@ jobs:
     - name: Build with Maven
       run: |
         ./build/mvn \
-        -pl !external.-- \
+        -pl '!external/kafka-0-10,!external/kafka-0-10-assembly,!external/kafka-0-10-sql,!external/avro' \
         -Dhadoop.version=2.9.1 \
         -Pyarn,hive,hive-thriftserver \
         -Pscala-2.11.7 \
